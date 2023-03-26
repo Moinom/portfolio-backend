@@ -1,14 +1,21 @@
-import express from 'express';
-import cors from 'cors';
-import artRoutes from './routes/artRoutes';
-import codeRoutes from './routes/codeRoutes';
+import express from "express";
+import cors from "cors";
+import artRoutes from "./routes/artRoutes";
+import codeRoutes from "./routes/codeRoutes";
+import * as dotenv from "dotenv";
+dotenv.config();
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 const app = express();
 
-app.use(cors());
-app.use('/art', artRoutes);
-app.use('/code', codeRoutes);
+const corsOptions = {
+  origin: process.env.FRONTEND_URL,
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
+app.use("/art", artRoutes);
+app.use("/code", codeRoutes);
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

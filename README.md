@@ -8,7 +8,7 @@ This backend uses the ImageKit API to provide my portfolio frontend with images 
 2. Define the environment variables, specified below
 3. Run `npm install` in the root directory to install all necessary packages
 4. Run `npm run start` in the root directory to start the development server
-5. The development server will run on port 8000 by default (http://localhost:8000)
+5. The development server will run on port 8000 unless specified via environment variable
 
 ## Environment variables
 
@@ -16,3 +16,4 @@ IMAGEKIT_PUBLIC_KEY as string \
 IMAGEKIT_PRIVATE_KEY as string \
 IMAGEKIT_URL as string \
 FRONTEND_URL as string
+PORT as string
