@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { cache } from "../index";
+import { cache, cacheId } from "../services/cacheService";
 import {
   ImagekitResponse,
   imagekitArt,
   imagekitCategories,
 } from "../services/imagekitService";
 
-const ART_CACHE_ID = "artCache";
+const ART_CACHE_ID = cacheId.art;
 
 const getArt = (request: Request, response: Response) => {
   if (cache.has(ART_CACHE_ID)) {
