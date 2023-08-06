@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { cache } from "../index";
+import { cache, cacheId } from "../services/cacheService";
 import {
   ImagekitResponse,
   imagekitCode,
   imagekitCategories,
 } from "../services/imagekitService";
 
-const Code_CACHE_ID = "codeCache";
+const Code_CACHE_ID = cacheId.code;
 
 const getCode = (request: Request, response: Response) => {
   if (cache.has(Code_CACHE_ID)) {
