@@ -1,11 +1,17 @@
-import { Request, Response } from 'express';
+import { Request, Response } from "express";
+import { cache } from "../index";
 import {
   ImagekitResponse,
   imagekitArt,
   imagekitCategories,
-} from '../services/imagekitService';
+} from "../services/imagekitService";
+
+const ART_CACHE_ID = "artCache";
 
 const getArt = (request: Request, response: Response) => {
+  if (cache.has(ART_CACHE_ID)) {
+    return response.json(cache.get(ART_CACHE_ID));
+  }
   imagekitArt.listFiles(
     {
       skip: 0,
@@ -23,6 +29,7 @@ const getArt = (request: Request, response: Response) => {
         url: data.url,
         tags: data.tags,
       }));
+      cache.set(ART_CACHE_ID, data);
       return response.json(data);
     }
   );

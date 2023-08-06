@@ -1,11 +1,17 @@
-import { Request, Response } from 'express';
+import { Request, Response } from "express";
+import { cache } from "../index";
 import {
   ImagekitResponse,
   imagekitCode,
   imagekitCategories,
-} from '../services/imagekitService';
+} from "../services/imagekitService";
+
+const Code_CACHE_ID = "codeCache";
 
 const getCode = (request: Request, response: Response) => {
+  if (cache.has(Code_CACHE_ID)) {
+    return response.json(cache.get(Code_CACHE_ID));
+  }
   imagekitCode.listFiles(
     {
       skip: 0,
@@ -27,6 +33,7 @@ const getCode = (request: Request, response: Response) => {
         url: data.url,
         tags: data.tags,
       }));
+      cache.set(Code_CACHE_ID, data);
       return response.json(data);
     }
   );
