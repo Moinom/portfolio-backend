@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
-import { cache, cacheId } from "../services/cacheService";
+import { Request, Response } from 'express';
+import { cache, cacheId } from '../services/cacheService';
 import {
   ImagekitResponse,
   imagekitArt,
   imagekitCategories,
-} from "../services/imagekitService";
+} from '../services/imagekitService';
 
 const ART_CACHE_ID = cacheId.art;
 
